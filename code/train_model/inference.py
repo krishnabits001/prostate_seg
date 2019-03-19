@@ -63,7 +63,7 @@ f1_util = f1_utilsObj(cfg,dt)
 
 ######################################
 #define save_dir for the model
-save_dir='../../models/tr_baseline_unet_prostate_md/'
+save_dir='../../models/tr_baseline_unet_prostate_md_deform/'
 print('save dir ',save_dir)
 
 #find the model with best dice score on validation images
@@ -103,6 +103,7 @@ image_data_test_load = nib.load(img_path)
 image_data_test_sys=image_data_test_load.get_data()
 pixel_size=image_data_test_load.header['pixdim'][1:4]
 affine_tst=image_data_test_load.affine
+#image_data_test_sys=image_data_test_sys[:,:,:,0]
 
 # Normalize input data using min-max normalization
 image_data_test_sys=dt.normalize_minmax_data(image_data_test_sys)
