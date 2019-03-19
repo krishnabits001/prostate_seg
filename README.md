@@ -1,7 +1,7 @@
 # prostate_seg
 for segmentation of prostate
 
-Requirements:
+Requirements:</br>
 Python 3.6.0,</br>
 Tensorflow 1.8.0,</br>
 rest of the requirements are mentioned in the "requirements.txt" file.
