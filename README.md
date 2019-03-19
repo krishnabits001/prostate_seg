@@ -15,3 +15,20 @@ pip install -r requirements.txt </br>
 
 To install tensorflow </br>
 pip install tensorflow-gpu=1.8.0 </br>
+
+
+III) Config files contents.
+One can modify the contents of the below config files to run the required experiments.</br>
+code/experiment_init/init_prostate_md.py </br>
+
+We can set the target resolution and image dimensions here. Target resolution and dimensions used for training of the model are present in that file. Resolution=(0.625,0.625) , image dimensions=(256,256). </br>
+
+        
+IV) For inference to get segmentation mask on an input test image use the below command (also mentioned in the train_model/inf_script.sh) : </br>
+Specify the path of the input image in the variable "ip_path" as specified below.</br>
+The output segmentation mask would be stored in the same path as "ip_path" with the name "pred_mask.nii.gz"</br>
+
+cd code/train_model/ </br>
+python inference.py --ip_path='/usr/krishnch/datasets/prostate/001/img.nii.gz' </br>
+
+
