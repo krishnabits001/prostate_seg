@@ -1,5 +1,4 @@
-# prostate_seg
-for segmentation of prostate
+#For segmentation of Prostate
 
 Requirements:</br>
 Python 3.6.0,</br>
