@@ -1,4 +1,4 @@
-#For segmentation of Prostate
+For segmentation of Prostate
 
 Requirements:</br>
 Python 3.6.0,</br>
