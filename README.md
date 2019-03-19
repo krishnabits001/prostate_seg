@@ -19,7 +19,6 @@ pip install tensorflow-gpu=1.8.0 </br>
 
 III) Config files contents : One can modify the contents of the below config file to run the required inference.</br>
 code/experiment_init/init_prostate_md.py </br>
-
 We can set the target resolution and image dimensions here. Target resolution and dimensions used for training of the model are present in that file. Resolution=(0.625,0.625) , image dimensions=(256,256). </br>
 
         
