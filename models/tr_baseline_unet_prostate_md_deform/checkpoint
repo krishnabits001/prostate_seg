@@ -1,0 +1,3 @@
+model_checkpoint_path: "/usr/bmicnas01/data-biwi-01/krishnch/projects/prostate_seg//models/prostate_md/tr_baseline_unet_rand_deform_contrast//with_data_aug/tr18/c1_v0/unet_dsc_1_sig_5.0_lr_seg_0.001/unet_prostate_md_epochs_9999.ckpt"
+all_model_checkpoint_paths: "/usr/bmicnas01/data-biwi-01/krishnch/projects/prostate_seg//models/prostate_md/tr_baseline_unet_rand_deform_contrast//with_data_aug/tr18/c1_v0/unet_dsc_1_sig_5.0_lr_seg_0.001/best_model/unet_prostate_md_best_model_epoch_7990.ckpt"
+all_model_checkpoint_paths: "/usr/bmicnas01/data-biwi-01/krishnch/projects/prostate_seg//models/prostate_md/tr_baseline_unet_rand_deform_contrast//with_data_aug/tr18/c1_v0/unet_dsc_1_sig_5.0_lr_seg_0.001/unet_prostate_md_epochs_9999.ckpt"
