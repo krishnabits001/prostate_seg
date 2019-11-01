@@ -265,17 +265,19 @@ for epoch_i in range(start_epoch,n_epochs):
 
 sess.close()
 ######################################
-if(parse_config.dataset=='prostate_md'):
-    # restore best model and predict segmentations on test subjects
-    saver_new = tf.train.Saver()
-    sess_new = tf.Session(config=config)
-    saver_new.restore(sess_new, mp_best)
-    print("best model chkpt",mp_best)
-    print("Model restored")
+#if(parse_config.dataset=='prostate_md'):
+# restore best model and predict segmentations on test subjects
+saver_new = tf.train.Saver()
+sess_new = tf.Session(config=config)
+saver_new.restore(sess_new, mp_best)
+print("best model chkpt",mp_best)
+print("Model restored")
 
-   #########################
-    # To compute inference on test images on the model that yields best dice score on validation images
-    f1_util.pred_segs_prostate_test_subjs(sess_new,ae,save_dir,orig_img_dt,test_list,struct_name)
+########################
+# To compute inference on test images on the model that yields best dice score on validation images
+f1_util.pred_segs_prostate_test_subjs(sess_new,ae,save_dir,orig_img_dt,test_list,struct_name)
+
+if(parse_config.dataset=='prostate_md'):
     ######################################
     # To compute inference on validation images on the best model
     save_dir_tmp=str(save_dir)+'/val_imgs_dsc/'
