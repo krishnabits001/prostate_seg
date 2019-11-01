@@ -70,7 +70,7 @@ f1_util = f1_utilsObj(cfg,dt)
 if parse_config.dataset == 'prostate_md':
     save_dir='../../models/tr_baseline_unet_prostate_md_deform/'
 elif parse_config.dataset == 'prostate_ge':
-    save_dir='../../models/'+str(parse_config.dataset)+'/tr_baseline_unet_rand_deform/'
+    save_dir=str(cfg.base_dir)+'/models/'+str(parse_config.dataset)+'/tr_baseline_unet_rand_deform/'
 print('save dir ',save_dir)
 
 #find the model with best dice score on validation images
