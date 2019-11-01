@@ -25,7 +25,7 @@ from utils import *
 import argparse
 parser = argparse.ArgumentParser()
 #data set type
-parser.add_argument('--dataset', type=str, default='prostate_md', choices=['prostate_md'])
+parser.add_argument('--dataset', type=str, default='prostate_ge', choices=['prostate_md','prostate_ge'])
 
 parser.add_argument('--ip_path', type=str, default=None)
 #parser.add_argument('--ip_path', type=str, default='/usr/krishnch/datasets/prostate/001/img.nii.gz')
@@ -40,6 +40,10 @@ if parse_config.dataset == 'prostate_md':
     #print('load prostate_md configs')
     import experiment_init.init_prostate_md as cfg
     import experiment_init.data_cfg_prostate_md as data_list
+elif parse_config.dataset == 'prostate_ge':
+    #print('load prostate_md configs')
+    import experiment_init.init_prostate_ge as cfg
+    import experiment_init.data_cfg_prostate_ge as data_list
 else:
     raise ValueError(parse_config.dataset)
 
@@ -63,7 +67,10 @@ f1_util = f1_utilsObj(cfg,dt)
 
 ######################################
 #define save_dir for the model
-save_dir='../../models/tr_baseline_unet_prostate_md_deform/'
+if parse_config.dataset == 'prostate_md':
+    save_dir='../../models/tr_baseline_unet_prostate_md_deform/'
+elif parse_config.dataset == 'prostate_ge':
+    save_dir='../../models/'+str(parse_config.dataset)+'/tr_baseline_unet_rand_deform/'
 print('save dir ',save_dir)
 
 #find the model with best dice score on validation images

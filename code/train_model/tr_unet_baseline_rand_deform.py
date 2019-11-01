@@ -24,9 +24,9 @@ from utils import *
 import argparse
 parser = argparse.ArgumentParser()
 #data set type
-parser.add_argument('--dataset', type=str, default='prostate_md', choices=['prostate_md'])
+parser.add_argument('--dataset', type=str, default='prostate_ge', choices=['prostate_md','prostate_ge'])
 #no of training images
-parser.add_argument('--no_of_tr_imgs', type=str, default='tr1', choices=['tr10', 'tr18', 'tr20', 'tr40'])
+parser.add_argument('--no_of_tr_imgs', type=str, default='tr6', choices=['tr1', 'tr6', 'tr10', 'tr18', 'tr20', 'tr40'])
 #combination of training images
 parser.add_argument('--comb_tr_imgs', type=str, default='c1', choices=['c1', 'c2', 'c3', 'c4', 'c5'])
 #learning rate of seg unet
@@ -53,6 +53,10 @@ if parse_config.dataset == 'prostate_md':
     #print('load prostate_md configs')
     import experiment_init.init_prostate_md as cfg
     import experiment_init.data_cfg_prostate_md as data_list
+elif parse_config.dataset == 'prostate_ge':
+    #print('load prostate_md configs')
+    import experiment_init.init_prostate_ge as cfg
+    import experiment_init.data_cfg_prostate_ge as data_list
 else:
     raise ValueError(parse_config.dataset)
 
@@ -65,6 +69,9 @@ dt = dataloaderObj(cfg)
 
 if parse_config.dataset == 'prostate_md':
     #print('set prostate_md orig img dataloader handle')
+    orig_img_dt=dt.load_prostate_imgs
+elif parse_config.dataset == 'prostate_ge':
+    #print('set prostate_ge orig img dataloader handle')
     orig_img_dt=dt.load_prostate_imgs
 
 #  load model object
@@ -258,18 +265,19 @@ for epoch_i in range(start_epoch,n_epochs):
 
 sess.close()
 ######################################
-# restore best model and predict segmentations on test subjects
-saver_new = tf.train.Saver()
-sess_new = tf.Session(config=config)
-saver_new.restore(sess_new, mp_best)
-print("best model chkpt",mp_best)
-print("Model restored")
+if(parse_config.dataset=='prostate_md'):
+    # restore best model and predict segmentations on test subjects
+    saver_new = tf.train.Saver()
+    sess_new = tf.Session(config=config)
+    saver_new.restore(sess_new, mp_best)
+    print("best model chkpt",mp_best)
+    print("Model restored")
 
-#########################
-# To compute inference on test images on the model that yields best dice score on validation images
-f1_util.pred_segs_prostate_test_subjs(sess_new,ae,save_dir,orig_img_dt,test_list,struct_name)
-######################################
-# To compute inference on validation images on the best model
-save_dir_tmp=str(save_dir)+'/val_imgs_dsc/'
-f1_util.pred_segs_prostate_test_subjs(sess_new,ae,save_dir_tmp,orig_img_dt,val_list,struct_name)
-######################################
+   #########################
+    # To compute inference on test images on the model that yields best dice score on validation images
+    f1_util.pred_segs_prostate_test_subjs(sess_new,ae,save_dir,orig_img_dt,test_list,struct_name)
+    ######################################
+    # To compute inference on validation images on the best model
+    save_dir_tmp=str(save_dir)+'/val_imgs_dsc/'
+    f1_util.pred_segs_prostate_test_subjs(sess_new,ae,save_dir_tmp,orig_img_dt,val_list,struct_name)
+    ######################################
